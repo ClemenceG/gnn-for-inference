@@ -1,0 +1,3 @@
+[submodule "pgm_graph_inference"]
+	path = pgm_graph_inference
+	url = https://github.com/sunfanyunn/pgm_graph_inference.git
