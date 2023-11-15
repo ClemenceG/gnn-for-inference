@@ -1,4 +1,5 @@
 # Reproduction of "Inference in Probabilistic Graphical Models by Graph Neural Networks"
+*Collaborators*: Anita Kriz, Alireza Dizaji, Anthony Gosselin, Jeremy Qin, Clémence Granade
 
 This repository contains code and resources to reproduce the results presented in the research paper "Inference in Probabilistic Graphical Models by Graph Neural Networks" by KiJung Yoon, et al. in 2009.
 
