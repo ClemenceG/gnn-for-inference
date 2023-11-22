@@ -23,7 +23,7 @@ pip install -r requirements.txt
 
 - **Title:** Inference in Probabilistic Graphical Models by Graph Neural Networks
 - **Authors:** KiJung Yoon, Renjie Liao, Yuwen Xiong, Lisa Zhang, Ethan Fetaya, Raquel Urtasun, Richard Zemel, Xaq Pitkow
-- **Year:** 2009
+- **Year:** 2019
 
 - **[Paper Link](https://arxiv.org/pdf/1803.07710.pdf)**
 - **[Code Repository](https://github.com/fanyun-sun/pgm_graph_inference)**

@@ -1,9 +1,13 @@
 numpy
 scipy
-torch
-torchvision
 tqdm
-networkx>=2.3
+networkx==2.8.8
+scikit-learn
+community
 python-igraph
 matplotlib
 torch-scatter
+
+# Might need to install manually: https://pytorch.org/
+torch
+torchvision
