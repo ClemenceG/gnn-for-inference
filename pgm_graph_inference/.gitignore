@@ -1,0 +1,10 @@
+papers/
+**/__pycache__
+graphical_models/datasets/
+inference/pretrained/
+experiments/saved_exp_res/*
+.ipynb*
+.DS_Store
+*.ipynb
+**/*.png
+sftp-config.json

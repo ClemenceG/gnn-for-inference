@@ -1,0 +1,7 @@
+numpy
+scipy
+torch
+torchvision
+tqdm
+networkx>=2.3
+python-igraph
