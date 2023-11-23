@@ -40,6 +40,19 @@ MACOSX_DEPLOYMENT_TARGET=10.9 pip install graphkernels
 
 ## Getting started
 
+### Data generation
+To generate data, use `make_data.sh`. It requires four arguments: 1. type of dataset you would like to generate (checkout the list at `graphical_models/data_gen.py -> struct_names variable`). 2. number of nodes for each graph (preferably 9 or 16) 3. Number of training samples 4. Number of testing samples
+
+For instance, to generate grid samples, each with 9 nodes, and 5000 samples for training and 1000 for test:
+```./make_data.sh grid 9_9 5000 1000```
+
+### Running experiments
+To run experiments both training and testing, use `run_all.sh`. This repo (currently) only supports two sizes of nodes: 9 and 16. To run with 9, append `_small` to the name of the dataset, otherwise append `_large`.
+Example to run on path with 9/16 nodes:
+```
+./run_all.sh path_[small | large] [model name = mgnn_inference] [training num = 1]
+```
+
 For imports to work correctly, add root of the repository to `PYTHONPATH` by running
 
 ```bash
