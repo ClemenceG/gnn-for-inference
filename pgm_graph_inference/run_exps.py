@@ -89,7 +89,7 @@ def run_experiment(train_set_name, test_set_name, inference_mode="marginal",
     model_load_path = os.path.join(model_base_dir, '-'.join([args.model_name, train_set_name, str(args.train_num)]))
 
     # train_data = get_dataset_by_name(train_set_name, train_path)
-    test_data  = get_dataset_by_name(test_set_name, test_path, mode=inference_mode)
+    test_data  = get_dataset_by_name(test_set_name, test_path, training_num=args.train_num, mode=inference_mode)
 
     print('load model from {}'.format(model_load_path))
     # print('load train data from {}/{}'.format(train_path, train_set_name))
@@ -118,14 +118,13 @@ def run_experiment(train_set_name, test_set_name, inference_mode="marginal",
         bp_algo = "mybp"
     bp = get_algorithm(bp_algo)(inference_mode)
     print('inferencing bp...')
-    bp_res = gnn_res#bp.run(test_data, use_log=True, verbose=False)
-    # bp_res = bp.run(test_data, use_log=True, verbose=False)
+    bp_res = bp.run(test_data, use_log=True, verbose=False)
     times["bp"] = (time()-t0) / len(test_data)
 
     # TODO! don't forget to uncomment
     t0 = time()
     mcmc = get_algorithm("mcmc")(inference_mode)
-    mcmc_res = bp_res #mcmc.run(test_data)
+    mcmc_res = mcmc.run(test_data)
     times["mcmc"] = (time()-t0) / len(test_data)
 
     #--- sanity check ----#
