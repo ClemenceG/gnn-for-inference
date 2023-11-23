@@ -1,7 +1,6 @@
 #!/bin/bash -ex
 ./make_data.sh star py3
 ./make_data.sh random_tree py3
-./make_data.sh powerlaw_tree py3
 ./make_data.sh path py3
 ./make_data.sh cycle py3
 ./make_data.sh ladder py3
