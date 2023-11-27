@@ -232,12 +232,17 @@ def save_marginal_results(true_labels, gnn_labels, bp_labels, mcmc_labels, filen
     res = {'true_labels': true_labels, 'gnn_labels': gnn_labels, 'bp_labels': bp_labels,
             'mcmc_labels': mcmc_labels, 'colors': colors}
     print('len(true_labels)', len(true_labels))
+    metrics = {}
     for k, v in res.items():
         if k == 'colors':
             continue
 
         kl = kl_div(true_labels, v)
-        print('{}, KL: {:.5f}, RMSE: {:.5f}'.format(k, kl, np.sqrt(((np.array(true_labels) - np.array(v))**2).mean())))
+        rmse = np.sqrt(((np.array(true_labels) - np.array(v))**2).mean())
+
+        print('{}, KL: {:.5f}, RMSE: {:.5f}'.format(k, kl, rmse))
+        metrics[k + '_metrics'] = {'KL': kl, 'RMSE': rmse}
+    res.update(metrics)
     np.save(filename, res)
     # np.save(filename, res)
 
