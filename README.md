@@ -5,8 +5,7 @@ This repository contains code and resources to reproduce the results presented i
 
 ## Getting Started
 1. Clone this repository: `git clone https://github.com/ClemenceG/gnn-for-inference.git`
-2. Run `./pull_sunfanyunn_repo.sh`
-3. Install requirements from requirements.txt
+2. Install requirements from requirements.txt
 ```bash
 pip install -r requirements.txt
 ```
@@ -14,9 +13,11 @@ pip install -r requirements.txt
 ```bash
 ./make_data.sh grid [py3]
 ```
+5. Before running experiments, make sure to have a folder named `experiments/saved_exp_res/`. Results will be logged as npy file in this folder.
+6. To run experiments (ex: grid-9): `$./run_all.sh grid_small MODEL TRAIN_NUM`
+7. To view results for a specific npy file, run the following: `python3 read_results.py --file_path LOGS_PATH`
 
 ### Commands
-- `./pull_sunfanyunn_repo.sh`: pulls code from https://github.com/fanyun-sun/pgm_graph_inference.git to obtain data
 - `./make_data.sh`: generates data (edited from sunfanyunn's repo)
 
 ## Paper Information
