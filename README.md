@@ -20,13 +20,6 @@ For instance:
 ./make_data.sh grid 9_9 5000 1000
 ```
 
-### Running experiments
-To run experiments both training and testing, use `run_all.sh`. This repo (currently) only supports two sizes of nodes: 9 and 16. To run with 9, append `_small` to the name of the dataset, otherwise append `_large`.
-Example to run on path with 9/16 nodes:
-```
-./run_all.sh path_[small | large] [model name (e.g. mgnn_inference)] [training num (e.g. 1)]
-```
-
 5. Before running experiments, make sure to have a folder named `experiments/saved_exp_res/`. Results will be logged as npy file in this folder.
 6. To run experiments (ex: grid-9): `$./run_all.sh grid_small MODEL TRAIN_NUM`
 7. To view results for a specific npy file, run the following: `python3 read_results.py --file_path LOGS_PATH`
