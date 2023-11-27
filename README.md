@@ -10,9 +10,23 @@ This repository contains code and resources to reproduce the results presented i
 pip install -r requirements.txt
 ```
 4. Generate data (option py3 for python3)
-```bash
-./make_data.sh grid [py3]
+Its general command form:
 ```
+./make_data.sh [type of dataset you would like to generate (checkout the list at `graphical_models/data_gen.py -> struct_names variable`)] [number of nodes per graph (preferably 9 or 16)] [Number of training samples] [Number of test samples]
+```
+
+For instance: 
+```bash
+./make_data.sh grid 9_9 5000 1000
+```
+
+### Running experiments
+To run experiments both training and testing, use `run_all.sh`. This repo (currently) only supports two sizes of nodes: 9 and 16. To run with 9, append `_small` to the name of the dataset, otherwise append `_large`.
+Example to run on path with 9/16 nodes:
+```
+./run_all.sh path_[small | large] [model name (e.g. mgnn_inference)] [training num (e.g. 1)]
+```
+
 5. Before running experiments, make sure to have a folder named `experiments/saved_exp_res/`. Results will be logged as npy file in this folder.
 6. To run experiments (ex: grid-9): `$./run_all.sh grid_small MODEL TRAIN_NUM`
 7. To view results for a specific npy file, run the following: `python3 read_results.py --file_path LOGS_PATH`
