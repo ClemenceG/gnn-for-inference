@@ -169,7 +169,7 @@ def run_experiment(train_set_name, test_set_name, inference_mode="marginal",
 
         # plot them
         plot_marginal_results_individual(true_labels, gnn_labels, bp_labels, mcmc_labels,
-            filename="./experiments/res_{}_{}".format(train_set_name, test_set_name))
+            filename="./experiments/res_{}_{}_{}".format(args.model_name, train_set_name, test_set_name))
 
     # MAP: only numeric
     else:
