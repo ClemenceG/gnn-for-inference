@@ -50,7 +50,7 @@ For instance, to generate grid samples, each with 9 nodes, and 5000 samples for 
 To run experiments both training and testing, use `run_all.sh`. This repo (currently) only supports two sizes of nodes: 9 and 16. To run with 9, append `_small` to the name of the dataset, otherwise append `_large`.
 Example to run on path with 9/16 nodes:
 ```
-./run_all.sh path_[small | large] [model name = mgnn_inference] [training num = 1]
+./run_all.sh [dataset name: e.g. 'path_small' | 'path_large'] [model name: e.g. 'mgnn_inference'] [training num: number of training samples] [testing num: number of testing samples]
 ```
 
 For imports to work correctly, add root of the repository to `PYTHONPATH` by running
