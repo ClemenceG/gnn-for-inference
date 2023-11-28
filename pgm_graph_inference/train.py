@@ -43,6 +43,11 @@ class CrossEntropyMAPComputer:
         return self.computer(output_probs[:, 1], targets)
 
 
+def get_model_path(model_dir: str, model_name: str, train_set_name: str, train_num: int, mode: str) -> str:
+    model_path = os.path.join(model_dir, '-'.join([model_name, train_set_name, str(train_num), mode]))
+
+    return model_path
+
 def parse_train_args():
     parser = argparse.ArgumentParser()
 
@@ -78,9 +83,9 @@ if __name__ == "__main__":
     print("Training a model `{}` on training dataset `{}`".format(args.model_name,
                                                                   args.train_set_name))
 
-    dataset = get_dataset_by_name(args.train_set_name, args.data_dir, args.train_num, mode=args.mode)
+    dataset = get_dataset_by_name(args.train_set_name, args.data_dir, num_samples=args.train_num, mode=args.mode)
     os.makedirs(args.model_dir, exist_ok=True)
-    model_path = os.path.join(args.model_dir, '-'.join([args.model_name, args.train_set_name, str(args.train_num)]))
+    model_path = get_model_path(args.model_dir, args.model_name, args.train_set_name, args.train_num, args.mode)
 
     # # filter by mode:
     # if args.mode =="marginal":

@@ -42,7 +42,7 @@ data_specs.update({"trees_medium": {"star": [15, 16, 17],
                   })
 data_specs.update({
                 #   "path_large": {"path":  [15,16,17]},
-                  "fc_large": {"fc": [15,16,17]},
+                #   "fc_large": {"fc": [15,16,17]},
                   "barbell_large": {"barbell": [15,16,17]},
                   "ladder_large": {"ladder": [15,16,17]},
                   "random_tree_large": {"random_tree": [15,16,17]},
@@ -65,7 +65,7 @@ data_specs.update({"nontrees_approx":
                  })
 
 # Data loading ----------------------------------------------------------------
-def get_dataset_by_name(specs_name, data_dir, training_num, mode=None):
+def get_dataset_by_name(specs_name, data_dir, num_samples, mode=None):
     """
     Assumes graphs live as
     graphical_models/datasets/{train/val/test}  <-- data_dir
@@ -105,7 +105,7 @@ def get_dataset_by_name(specs_name, data_dir, training_num, mode=None):
                     graph.struct = struct
                     graphs.append(graph)
                     num += 1
-                    if num == training_num:
+                    if num == num_samples:
                         if mode is not None:
                             graphs = [g for g in graphs if getattr(g, mode) is not None]
                         print("Loaded {} graphs".format(len(graphs)))
