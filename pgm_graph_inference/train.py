@@ -80,7 +80,7 @@ if __name__ == "__main__":
 
     dataset = get_dataset_by_name(args.train_set_name, args.data_dir, args.train_num, mode=args.mode)
     os.makedirs(args.model_dir, exist_ok=True)
-    model_path = os.path.join(args.model_dir, '-'.join([args.model_name, args.train_set_name, str(args.train_num)]))
+    model_path = os.path.join(args.model_dir, '-'.join([args.model_name, args.mode, args.train_set_name, str(args.train_num)]))
 
     # # filter by mode:
     # if args.mode =="marginal":

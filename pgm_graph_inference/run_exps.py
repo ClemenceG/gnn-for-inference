@@ -86,7 +86,7 @@ def run_experiment(train_set_name, test_set_name, inference_mode="marginal",
     train_path = os.path.join(base_data_dir, "train")
     test_path = os.path.join(base_data_dir, "test")
      
-    model_load_path = os.path.join(model_base_dir, '-'.join([args.model_name, train_set_name, str(args.train_num)]))
+    model_load_path = os.path.join(model_base_dir, '-'.join([args.model_name, inference_mode, train_set_name, str(args.train_num)]))
 
     # train_data = get_dataset_by_name(train_set_name, train_path)
     test_data  = get_dataset_by_name(test_set_name, test_path, training_num=args.train_num, mode=inference_mode)
@@ -162,14 +162,16 @@ def run_experiment(train_set_name, test_set_name, inference_mode="marginal",
         #     colors.extend([g.struct] * g.n_nodes)
 
         # save these results
-        filename = "./experiments/saved_exp_res/res_{}_{}_{}".format(train_set_name, test_set_name, args.model_name)
+        filename = "./experiments/saved_exp_res/res_{}_{}_{}".format(train_set_name, inference_mode, args.model_name)
         print('save results at {}'.format(filename))
         save_marginal_results(true_labels, gnn_labels, bp_labels, mcmc_labels,
             filename=filename)
 
         # plot them
-        # plot_marginal_results_individual(true_labels, gnn_labels, bp_labels, mcmc_labels,
-            # filename="./experiments/res_{}_{}".format(train_set_name, test_set_name))
+        plot_marginal_results_individual(true_labels, gnn_labels, bp_labels, mcmc_labels,
+            filename="./experiments/res_{}_{}".format(train_set_name, args.model_name))
+        
+        # plot_marginal_results(true_labels, gnn_labels, bp_labels, mcmc_labels, filename="./experiments/res__{}_{}".format(train_set_name, test_set_name))
 
     # MAP: only numeric
     else:
