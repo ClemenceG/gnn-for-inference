@@ -18,7 +18,9 @@ from inference.vanilla_gnn_inference import VanillaGNNInference
 from inference.mgnn_inference import MGNNInference
 from inference.bpnn_inference import BPNNInference
 from inference.fenbp_inference import FENBPInference
-
+from inference.vanilla_gnn_lstm_inference import VanillaGNNLSTMInference
+from inference.mgnn_lstm_inference import MGNNLSTMInference
+from inference.factor_gnn_lstm_inference import FactorGNNLSTMInference
 
 def get_algorithm(algo_name):
     """ Returns a constructor """
@@ -49,5 +51,11 @@ def get_algorithm(algo_name):
         return ExactInference
     elif algo_name == "mcmc":
         return GibbsSampling
+    elif algo_name == "vanilla_gnn_lstm":
+        return VanillaGNNLSTMInference
+    elif algo_name == "mgnn_lstm":
+        return MGNNLSTMInference
+    elif algo_name == "factor_gnn_lstm":
+        return FactorGNNLSTMInference
     else:
         raise ValueError("Inference algorithm {} not supported".format(algo_name))

@@ -9,9 +9,9 @@ from torch_scatter import scatter
 # from torch.nn import Sequential, Linear, ReLU
 # from torch_geometric.nn.conv import GINConv, GatedGraphConv
 
-class VGNN_sparse(nn.Module):
+class VGNN_LSTM(nn.Module):
     def __init__(self, state_dim, message_dim,hidden_unit_message_dim, hidden_unit_readout_dim, n_steps=10):
-        super(VGNN_sparse, self).__init__()
+        super(VGNN_LSTM, self).__init__()
 
         self.state_dim = state_dim
         self.n_steps = n_steps
