@@ -140,7 +140,15 @@ class GGNN_LSTM(nn.Module):
                                            f2v_to_v2f_feat[row, col, :]], dim=-1)
             edge_messages = self.var2fac_message_passing(raw_edge_messages)
 
-            node_messages = scatter(edge_messages, col, dim=0, reduce='sum')
+            _node_messages = scatter(edge_messages, col, dim=0, reduce='sum')
+            mismatch_num = _node_messages.shape[0] - var2fac_hidden_states.shape[0]
+
+            if mismatch_num == 0:
+                node_messages = _node_messages
+            else:
+                node_messages = torch.zeros((var2fac_hidden_states.shape[0], _node_messages.shape[1]), device=_node_messages.device)
+                node_messages[:mismatch_num] = node_messages[:mismatch_num] + _node_messages
+                
             var2fac_hidden_states, var2fac_cell_state = self.var2fac_propagator(node_messages, (var2fac_hidden_states, var2fac_cell_state))
 
             # we get the updated hidden_states of var2fac msg nodes

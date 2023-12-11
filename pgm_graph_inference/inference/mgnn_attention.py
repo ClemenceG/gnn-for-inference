@@ -151,7 +151,15 @@ class GGANN(nn.Module):
             attn_coeff = self.attention(fac2var_hidden_states[row, :], var2fac_hidden_states[col, :])
             attn_coeff = F.softmax(attn_coeff, dim=0)
             edge_messages = self.var2fac_message_passing(edge_messages) * attn_coeff
-            node_messages = scatter(edge_messages, col, dim=0, reduce='sum')
+            _node_messages = scatter(edge_messages, col, dim=0, reduce='sum')
+            mismatch_num = _node_messages.shape[0] - var2fac_hidden_states.shape[0]
+
+            if mismatch_num == 0:
+                node_messages = _node_messages
+            else:
+                node_messages = torch.zeros((var2fac_hidden_states.shape[0], _node_messages.shape[1]), device=_node_messages.device)
+                node_messages[:mismatch_num] = node_messages[:mismatch_num] + _node_messages
+                
             var2fac_hidden_states = self.var2fac_propagator(node_messages, var2fac_hidden_states)
             # we get the updated hidden_states of var2fac msg nodes
 
