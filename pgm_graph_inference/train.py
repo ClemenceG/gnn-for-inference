@@ -14,6 +14,7 @@ import torch
 import torch.nn as nn
 from torch.optim import Adam
 import matplotlib.pyplot as plt
+from time import time
 
 from experiments.exp_helpers import get_dataset_by_name
 from inference import get_algorithm
@@ -131,6 +132,8 @@ if __name__ == "__main__":
 
     best_epoch = -1
     best_loss = 1e9
+    t0 = time()
+    time_at_best_epoch = None
     for epoch in range(args.epochs):
         gnn_inference.train(dataset, optimizer, criterion, DEVICE)
         loss = gnn_inference.history["loss"][-1]
@@ -138,9 +141,13 @@ if __name__ == "__main__":
         if loss < best_loss:
             best_loss = loss
             best_epoch = epoch
+            time_at_best_epoch = time()
             gnn_inference.save_model(model_path)
             print('Epoch {}: loss {}'.format(epoch, loss))
             print("Model saved in {}".format(model_path))
 
-        if epoch - best_epoch > 4:
+        if epoch - best_epoch > 10:
             break
+    
+    convergence_time = (time()-t0)
+    print("Training convergence time:", convergence_time, "s for", (best_epoch + 1), "epochs. (", convergence_time/(best_epoch + 1),"s/epoch )")
