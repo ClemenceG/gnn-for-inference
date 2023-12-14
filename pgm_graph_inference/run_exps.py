@@ -117,7 +117,7 @@ def run_experiment(train_set_name, test_set_name, inference_mode="marginal",
     if use_my_bp:
         bp_algo = "mybp"
     bp = get_algorithm(bp_algo)(inference_mode)
-    print('inferencing bp...')
+    print(f'inferencing {bp_algo}...')
     bp_res = bp.run(test_data, use_log=True, verbose=False)
     times["bp"] = (time()-t0) / len(test_data)
 
