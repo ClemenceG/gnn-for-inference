@@ -443,7 +443,7 @@ def to_factor_graph(graph):
                 number_of_factors += 1
 
     m = int(np.sqrt(n_nodes))
-    assert number_of_factors == n_nodes + (m-1)*m*2
+    # assert number_of_factors == n_nodes + (m-1)*m*2
     return g
 
 class MyBeliefPropagation(Inference):

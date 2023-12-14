@@ -85,7 +85,7 @@ class TreeBP(Inference):
 
         return results
 
-    def run(self, graphs, verbose=False):
+    def run(self, graphs, use_log=True, verbose=False):
         self.verbose = verbose
         res = []
         graph_iterator = tqdm(graphs) if self.verbose else graphs
