@@ -94,7 +94,7 @@ class BeliefPropagation(Inference):
                 Jij = graph.W[i][neighbor] # vector
                 bi = graph.b[i]            # scalar
 
-                local_potential = Jij.reshape(-1,1,1)*xij + bi*xi.reshape(-1,1)
+                local_potential = Jij.reshape(-1,1,1)*xij.reshape(1, 2, 2) + bi*xi.reshape(1,2,1)
                 # print(local_potential)
                 if not use_log:
                     local_potential = np.exp(local_potential)
@@ -109,6 +109,8 @@ class BeliefPropagation(Inference):
                 # messages_ = messages.copy()
                 for k in range(degrees[i]):
                     j = neighbor[k]
+                    # print(i, j, k)
+                    # input()
                     if use_log:
                         messages[index_bases[i]+k] = in_message_prod - \
                            (messages[index_bases[j]+neighbors[j].index(i)])
@@ -117,6 +119,8 @@ class BeliefPropagation(Inference):
                            messages[index_bases[j]+neighbors[j].index(i)])
                 # update
                 # print(index_bases[i], degrees[i])
+                # input()
+                # print(messages[index_bases[i]:index_bases[i]+degrees[i]].shape, messages[index_bases[i]:index_bases[i]+degrees[i]].reshape(degrees[i],2,1).shape)
                 # input()
                 if use_log:
                     messages[index_bases[i]:index_bases[i]+degrees[i]] = \
