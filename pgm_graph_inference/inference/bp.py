@@ -67,7 +67,7 @@ class BeliefPropagation(Inference):
         index_bases = np.zeros(n_V, dtype=np.int64)
         for i in range(1, n_V): 
             index_bases[i] = index_bases[i-1] + degrees[i-1]
-
+        # input(index_bases)
         neighbors = {i:[] for i in range(n_V)}
         for i,j in zip(row,col): neighbors[i].append(j)
         neighbors = {k: sorted(v) for k, v in neighbors.items()}
@@ -90,10 +90,10 @@ class BeliefPropagation(Inference):
             for i in ordered_nodes:
                 # print("updating message at", i)
                 neighbor = neighbors[i]
-                # print(neighbor)
+
                 Jij = graph.W[i][neighbor] # vector
                 bi = graph.b[i]            # scalar
-                # print(Jij, bi)
+
                 local_potential = Jij.reshape(-1,1,1)*xij + bi*xi.reshape(-1,1)
                 # print(local_potential)
                 if not use_log:
@@ -116,15 +116,22 @@ class BeliefPropagation(Inference):
                         messages[index_bases[i]+k] = self._safe_divide(in_message_prod,
                            messages[index_bases[j]+neighbors[j].index(i)])
                 # update
-                messages[index_bases[i]:index_bases[i]+degrees[i]] = \
-                    sumOp(messages[index_bases[i]:index_bases[i]+degrees[i]].reshape(degrees[i],2,1) + local_potential, axis=1)
+                # print(index_bases[i], degrees[i])
+                # input()
+                if use_log:
+                    messages[index_bases[i]:index_bases[i]+degrees[i]] = \
+                        sumOp(messages[index_bases[i]:index_bases[i]+degrees[i]].reshape(degrees[i],2,1) + local_potential, axis=1)
+                else:
+                    messages[index_bases[i]:index_bases[i]+degrees[i]] = \
+                        sumOp(messages[index_bases[i]:index_bases[i]+degrees[i]].reshape(degrees[i],2,1) * local_potential, axis=1)
 
             # check convergence 
             if use_log:
                 error = (self._safe_norm_exp(messages) - self._safe_norm_exp(old_messages))**2
             else:
                 error = (messages - old_messages)**2
-
+            # print(error.mean())
+            # input("stop...")
             if len(error):
                 error = error.mean()
             else:
