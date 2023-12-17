@@ -89,6 +89,7 @@ def get_dataset_by_name(specs_name, data_dir, num_samples, mode=None):
     graphs = []
     num= 0
     for struct in specs:
+        print(struct)
         size_list = specs[struct]
         for size in size_list:
             # go to specified dir, load and append

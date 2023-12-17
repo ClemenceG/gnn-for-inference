@@ -243,7 +243,7 @@ def save_marginal_results(true_labels, gnn_labels, bp_labels, mcmc_labels, filen
         kl, nl_kl = kl_div(true_labels, v)
         rmse = np.sqrt(((np.array(true_labels) - np.array(v))**2).mean())
 
-        print('{}, KL: {:.5f}, neg log10 KL: {:.5f}, RMSE: {:.5f}'.format(k, kl, nl_kl, rmse))
+        print('{}, KL: {:.10f}, neg log10 KL: {:.2f}, RMSE: {:.5f}'.format(k, kl, nl_kl, rmse))
         metrics[k + '_metrics'] = {'KL': kl, 'RMSE': rmse}
     res.update(metrics)
     np.save(filename, res)
@@ -350,7 +350,7 @@ if __name__ == "__main__":
         struct = args.exp_name[len("in_sample_"):]
         in_sample_experiment(struct=struct)
     elif args.exp_name == "out_sample":
-        out_of_sample_experiment("fc_small","fc_small")
+        out_of_sample_experiment("combine13_small","path_small")
     elif args.exp_name == "upscaling":
         upscaling_experiment("barbell")
     elif args.exp_name == "in_sample_map":

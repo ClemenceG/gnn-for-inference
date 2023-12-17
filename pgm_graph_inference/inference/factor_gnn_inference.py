@@ -78,6 +78,8 @@ class FactorGNNInference(Inference):
         for i, graph in tqdm(enumerate(dataset)):
             b = torch.from_numpy(graph.b).float().to(device)
             J = torch.from_numpy(graph.W).float().to(device)
+            if J.unique().numel() == 1:
+                continue
             out = self.model(J,b)
 
             if self.mode == "marginal":
