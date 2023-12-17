@@ -99,7 +99,5 @@ class FactorGNNInference(Inference):
                 self.model.zero_grad()
                 batch_loss=[]
                 mean_losses.append(ll_mean.item())
-            if i > 50:
-                break
 
         self.history["loss"].append(np.mean(mean_losses))
