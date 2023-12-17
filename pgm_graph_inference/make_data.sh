@@ -2,8 +2,8 @@
 # Runner of small exact experiment
 # run as run_small.sh make_data path
 
-rm graphical_models/datasets/train/$1 -rf
-rm graphical_models/datasets/test/$1 -rf
+# rm graphical_models/datasets/train/$1 -rf
+# rm graphical_models/datasets/test/$1 -rf
 
 echo -e "\tCreating train data"
 python create_data.py --graph_struct $1 --size_range $2 \
